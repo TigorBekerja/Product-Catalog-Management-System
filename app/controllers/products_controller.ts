@@ -10,9 +10,7 @@ export default class ProductsController {
         const products = await Product.query().paginate(page, limit)
 
         const json = products.toJSON()
-        console.log(
-            json.meta.currentPage 
-        )
+        
         return response.ok(
             {
                 items:json.data,
