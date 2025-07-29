@@ -31,7 +31,7 @@ export default class AuthJwtMiddleware {
 
       return next()
     } catch (error) {
-      return response.unauthorized('message: Invalid token')
+      return response.unauthorized({message: 'Invalid token'})
     }
   }
 }
