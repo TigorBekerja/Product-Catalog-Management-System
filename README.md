@@ -9,8 +9,11 @@ This project is a REST API for managing products. It is built using the AdonisJS
 - Centralized error handling
 - Authorization: User can only modify their own products
   
-[behavorial questions video
-](https://drive.google.com/drive/folders/1lUpZytWsFaZvKSmLJDutsQRhX-I-B71D?usp=sharing)
+[Behavorial Question Video](https://drive.google.com/file/d/1sxClFIb9ACxid8RzaKw130sfAjJNuHrO/view?usp=drive_link)
+
+[API Demonstration Video](https://drive.google.com/file/d/1sxClFIb9ACxid8RzaKw130sfAjJNuHrO/view?usp=drive_link)
+
+You can import the Postman collection [here](./Product%20Catalog%20API.postman_collection.json) to test the API endpoints easily.
 
 ## database schema
 <img width="387" height="272" alt="be drawio" src="https://github.com/user-attachments/assets/ffe98691-6cbb-4d0b-828a-72bb1b6f0267" />
