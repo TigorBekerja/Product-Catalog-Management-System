@@ -61,11 +61,12 @@ export default class ProductsController {
         if (product.userId != user.id) {
             return response.unauthorized({message: 'Access denied'})
         }
+        const body = request.body()
         const payload = {
-            name: request.body().name,
-            type: request.body().type,
-            description: request.body().description,
-            price: request.body().price,
+            name: body.name,
+            type: body.type,
+            description: body.description,
+            price: body.price,
         }
         const {error, value} = updateProductSchema.validate(payload, { abortEarly: false })
         if (error) throw error
