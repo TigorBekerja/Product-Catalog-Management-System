@@ -1,5 +1,6 @@
 # Product Catalog Management System
-This project is a REST API for a Product management system. It uses the AdonisJS framework and PostgreSQL. You can register, login, see all or specific product; post, update, and delete your products.
+This project is a REST API for managing products. It is built using the AdonisJS framework and PostgreSQL database. Users can register, log in, and manage their own products, while all products are publicly viewable.
+
 
 ## Features
 - User registration & login with JWT
