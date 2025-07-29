@@ -3,9 +3,24 @@ import Product from '#models/product'
 import { createProductSchema, updateProductSchema } from '#validators/product'
 
 export default class ProductsController {
-    public async index({response}:  HttpContext) {
-        const products = await Product.query()
-        return response.ok(products)
+    public async index({request, response}:  HttpContext) {
+        const page = request.input('page', 1)
+        const limit = request.input('limit', 10)
+
+        const products = await Product.query().paginate(page, limit)
+
+        const json = products.toJSON()
+        console.log(
+            json.meta.currentPage 
+        )
+        return response.ok(
+            {
+                items:json.data,
+                total: json.meta.total,
+                page: json.meta.currentPage,
+                totalPages: json.meta.lastPage
+            }
+        )
     }
 
     public async store({request, response} : HttpContext) {
