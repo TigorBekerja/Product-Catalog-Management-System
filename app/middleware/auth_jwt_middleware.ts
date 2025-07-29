@@ -25,7 +25,7 @@ export default class AuthJwtMiddleware {
       }
 
       request.updateBody({
-        ...request.body,
+        ...request.body(),
         authUser: user
       })
 

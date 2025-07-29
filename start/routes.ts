@@ -16,11 +16,18 @@ router.get('/', async () => {
   }
 })
 import UsersController from '#controllers/users_controller'
+import ProductsController from '#controllers/products_controller'
 
 router.post('/auth/register', [UsersController, 'register'])
 router.post('/auth/login', [UsersController, 'login'])
 
+router.get('/items', [ProductsController, 'index'])
+router.get('/items/:id', [ProductsController, 'show'])
+
 router.group(() => {
   router.get('/profile', [UsersController, 'profile'])
+  router.post('/items', [ProductsController, 'store'])
+  router.delete('/items/:id', [ProductsController, 'destroy'])
+  router.put('/items/:id', [ProductsController, 'update'])
 }).middleware(middleware.authJwt())
 

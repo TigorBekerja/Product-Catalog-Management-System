@@ -3,36 +3,34 @@ import User from '#models/user'
 import jwt from 'jsonwebtoken'
 import jwtConfig from '#config/jwt'
 import Hash from '@adonisjs/core/services/hash'
-import { loginUserValidator, registerUserValidator } from '#validators/user'
-import { validationMessages } from '#validators/messages'
+import { registerUserSchema, loginUserSchema } from '#validators/user'
 
 export default class UsersController {
     public async register({ request, response }: HttpContext) {
-        const userData = await request.validateUsing(registerUserValidator, {
-            messagesProvider: validationMessages
-        })
+        const {error, value} = registerUserSchema.validate(request.body(), { abortEarly: false })
+        if (error) throw error
 
-        const exist = await User.findBy('email', userData.email)
+        const exist = await User.findBy('email', value.email)
         if (exist) {
             return response.conflict({ message: 'Email already registered' })
         }
 
-
         try {
-            const newUser = await User.create(userData)
+            const newUser = await User.create(value)
             return response.created(newUser)
         } catch (error) {
             return response.badRequest('message: ' + error.message)
         }
     }
     public async login({ request, response }: HttpContext) {
-        const { email, password } = await request.validateUsing(loginUserValidator)
+        const {error, value} = loginUserSchema.validate(request.body(), { abortEarly: false })
+        if (error) throw error
 
-        const user = await User.findBy('email', email)
+        const user = await User.findBy('email', value.email)
         if (!user) {
             return response.badRequest('message: User not found')
         }
-        const passwordMatch = await Hash.verify(user.password, password)
+        const passwordMatch = await Hash.verify(user.password, value.password)
         if (!passwordMatch) {
             return response.badRequest('message: Invalid credentials')
         }
