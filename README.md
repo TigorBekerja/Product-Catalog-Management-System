@@ -11,7 +11,7 @@ This project is a REST API for managing products. It is built using the AdonisJS
   
 [Behavorial Question Video](https://drive.google.com/file/d/1sxClFIb9ACxid8RzaKw130sfAjJNuHrO/view?usp=drive_link)
 
-[API Demonstration Video](https://drive.google.com/file/d/1sxClFIb9ACxid8RzaKw130sfAjJNuHrO/view?usp=drive_link)
+[API Demonstration Video](https://drive.google.com/file/d/1D10hvW1AzaoDuElCsjGJnulVqNX-Z1BI/view?usp=drive_link)
 
 You can import the Postman collection [here](./Product%20Catalog%20API.postman_collection.json) to test the API endpoints easily.
 
