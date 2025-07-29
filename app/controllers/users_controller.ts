@@ -3,11 +3,11 @@ import User from '#models/user'
 import jwt from 'jsonwebtoken'
 import jwtConfig from '#config/jwt'
 import Hash from '@adonisjs/core/services/hash'
-import { registerUserSchema, loginUserSchema } from '#validators/user'
+import { userSchema } from '#validators/user'
 
 export default class UsersController {
     public async register({ request, response }: HttpContext) {
-        const {error, value} = registerUserSchema.validate(request.body(), { abortEarly: false })
+        const {error, value} = userSchema.validate(request.body(), { abortEarly: false })
         if (error) throw error
 
         const exist = await User.findBy('email', value.email)
@@ -23,7 +23,7 @@ export default class UsersController {
         }
     }
     public async login({ request, response }: HttpContext) {
-        const {error, value} = loginUserSchema.validate(request.body(), { abortEarly: false })
+        const {error, value} = userSchema.validate(request.body(), { abortEarly: false })
         if (error) throw error
 
         const user = await User.findBy('email', value.email)
