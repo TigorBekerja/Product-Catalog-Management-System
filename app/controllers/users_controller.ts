@@ -28,11 +28,11 @@ export default class UsersController {
 
         const user = await User.findBy('email', value.email)
         if (!user) {
-            return response.badRequest('message: User not found')
+            return response.badRequest({message: 'User not found'})
         }
         const passwordMatch = await Hash.verify(user.password, value.password)
         if (!passwordMatch) {
-            return response.badRequest('message: Invalid credentials')
+            return response.badRequest({message: 'Invalid credentials'})
         }
 
         const token = jwt.sign(
@@ -56,7 +56,7 @@ export default class UsersController {
         const user = request.body().authUser
 
         if (!user) {
-            return response.unauthorized('message: User not authenticated')
+            return response.unauthorized({message: 'User not authenticated'})
         }
 
         return response.ok({
