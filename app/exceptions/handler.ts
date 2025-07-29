@@ -14,15 +14,16 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    */
   async handle(error: any, ctx: HttpContext) {
     if (error.isJoi) {
-      return ctx.response.status(422).send({
-        message: 'Validation failed',
-        errors: error.details.map((err: any) => ({
-          field: err.context?.key,
-          message: err.message,
-        })),
-      })
-    }
-    
+  return ctx.response.status(400).send({
+    message: 'Validation failed',
+    errors: error.details.map((err: any) => ({
+      field: err.path.join('.'),
+      message: err.message.replace(/"/g, ''), 
+    })),
+  })
+}
+
+
     if (error.status === 401) {
       return ctx.response.status(401).send({
         message: 'Unauthorized',
